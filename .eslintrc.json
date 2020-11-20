@@ -1,0 +1,24 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "extends": [
+        "airbnb-base"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12
+    },
+    "rules": {
+      "semi": ["error", "never"],
+      "arrow-parens": ["error", "as-needed"],
+      "func-names": ["error", "never"],
+      "consistent-return": 0,
+      "no-prototype-builtins": 0,
+      "space-before-function-paren": ["error", "always"],
+      "no-underscore-dangle": 0,
+      "object-curly-newline": 0
+    }
+}
