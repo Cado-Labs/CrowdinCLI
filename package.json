@@ -1,5 +1,5 @@
 {
-  "name": "Cado-Labs/CrowdinCLI",
+  "name": "CrowdinCLI",
   "version": "3.0.10",
   "description": "Cli tool for crowdin",
   "main": "index.js",
