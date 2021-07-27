@@ -1,4 +1,14 @@
-# crowdin-cli-tool
+# crowdin-cli-tool [![Supporting](https://github.com/Cado-Labs/cado-labs-logos/blob/main/cado_labs_badge.png)](https://github.com/Cado-Labs/)
+
+---
+
+<p>
+  <a href="https://github.com/Cado-Labs">
+    <img src="https://github.com/Cado-Labs/cado-labs-logos/blob/main/cado_labs_supporting.svg" alt="Supported by Cado Labs" />
+  </a>
+</p>
+
+---
 
 ## Инициализация
 
