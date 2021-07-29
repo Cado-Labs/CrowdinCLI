@@ -1,0 +1,35 @@
+{
+  "name": "@cadolabs/crowdin-cli",
+  "version": "3.0.12",
+  "description": "Cli tool for crowdin",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Cado-Labs/CrowdinCLI.git"
+  },
+  "bin": {
+    "crowdin": "./bin/crowdin"
+  },
+  "scripts": {
+    "lint": "npx eslint ."
+  },
+  "author": "Genys",
+  "license": "ISC",
+  "dependencies": {
+    "@crowdin/crowdin-api-client": "^1.11.0",
+    "decompress": "^4.2.1",
+    "deep-object-diff": "^1.1.0",
+    "deepmerge": "^4.2.2",
+    "diff": "^5.0.0",
+    "glob": "^7.1.7",
+    "js-yaml": "^4.1.0",
+    "simple-git": "^2.39.0",
+    "yargs": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.3"
+  }
+}

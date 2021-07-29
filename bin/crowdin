@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+
+const showHelp = require('../src/actions/showHelp')
+const showVersion = require('../src/actions/showVersion')
+const saveGlobalConfig = require('../src/actions/saveGlobalConfig')
+const abort = require('../src/utils/abort')
+const params = require('../src/params')
+const Crowdin = require('../Crowdin')
+
+const [action] = params._
+
+if (params.h || params.help) showHelp()
+if (params.v || params.version) showVersion()
+if (action === 'init') return saveGlobalConfig(params)
+
+;(async () => {
+  const crowdin = await Crowdin.init()
+  switch (action) {
+    case 'upload':
+    case 'push':
+      return crowdin.uploadAll()
+    case 'download':
+    case 'pull':
+      return crowdin.downloadAll()
+    case 'push-diff':
+      return crowdin.pushDiff()
+    case 'pull-diff':
+      return crowdin.pullDiff()
+    case 'task':
+      return crowdin.task()
+    case 'clean':
+      return crowdin.deleteBranch()
+    case 'lint':
+      return crowdin.lint()
+
+    // Old commands
+    case 'sync':
+      return crowdin.sync()
+    case 'upload-translations':
+      return crowdin.uploadTranslations()
+    case 'upload-source':
+      return crowdin.uploadSource()
+    default:
+      if (!action) abort('Action cannot be empty. Use [crowdin <action>]')
+      abort(`Action [${action}] dosn't exists. See 'crowdin -h' for more info.`)
+  }
+})()
