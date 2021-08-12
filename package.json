@@ -1,6 +1,6 @@
 {
   "name": "@cadolabs/crowdin-cli",
-  "version": "3.0.14",
+  "version": "3.0.15",
   "description": "Cli tool for crowdin",
   "main": "index.js",
   "repository": {
