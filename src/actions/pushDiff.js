@@ -14,6 +14,21 @@ module.exports = async (branch, { sourceFiles, sourceLocale }) => {
   const pushLogger = new Logger(`Pushing files diff to branch: ${branch.branchName}`)
   if (!branch.name || branch.name === 'master') pushLogger.error('This command not allowed from master branch')
   await git.init()
+
+  try {
+    await git.remote(['update'])
+    const countDiffWithMaster = await git.raw(['rev-list', 'HEAD...master', '--count'])
+    const countDiffWithOriginMaster = await git.raw(['rev-list', 'HEAD...origin/master', '--count'])
+    if (countDiffWithMaster !== countDiffWithOriginMaster) pushLogger.error('Please update master and rebase you branch')
+
+    const { all: logCurrentBranch } = await git.log()
+    const { all: logMasterBranch } = await git.log(['master'])
+    const isNeedRebase = !logCurrentBranch.find(commit => commit.hash === logMasterBranch[0].hash)
+    if (isNeedRebase) pushLogger.error('Please rebase you branch from master')
+  } catch (error) {
+    pushLogger.error('Error:', error)
+  }
+
   const gdiff = await git.diff([diffWith || 'HEAD', baseDir])
 
   if (gdiff) pushLogger.error('You have uncommited files! Commit them before!')
