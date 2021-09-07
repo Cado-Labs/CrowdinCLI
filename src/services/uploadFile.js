@@ -1,5 +1,6 @@
 const path = require('path')
 const abort = require('../utils/abort')
+const { updateOption = 'keep_translations_and_approvals' } = require('../config')
 const createDirInCrowdin = require('./createDirInCrowdin')
 const listProjectFiles = require('./listProjectFiles')
 const api = require('../api')
@@ -10,7 +11,7 @@ module.exports = async (branch, filePath, storageId) => {
   const file = projectFiles.find(({ data }) => data.path === crowdinPath)
   try {
     if (file) {
-      await api.updateOrRestoreFile(file.data.id, { storageId })
+      await api.updateOrRestoreFile(file.data.id, { storageId, updateOption })
       return file.data.id
     }
     const dirname = path.dirname(filePath).replace(/^\.?\/?/, '')
