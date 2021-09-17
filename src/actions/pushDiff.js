@@ -46,7 +46,7 @@ module.exports = async (branch, { sourceFiles, sourceLocale }) => {
       const fileName = path.basename(filePath)
       const storageId = await uploadToStorage(dumpPostprocess(yaml.dump(fileContent)), fileName)
       const fileId = await uploadFile(branch, filePath, storageId)
-      await uploadTranslation(fileId, sourceLocale.id, storageId)
+      await uploadTranslation(fileId, sourceLocale.twoLettersCode, storageId)
     } catch (e) { pushLogger.error('error in push file diff', e) }
   }
 
