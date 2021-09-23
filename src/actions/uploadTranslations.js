@@ -21,31 +21,29 @@ module.exports = async (branch, { filesToTranslate, sourceFiles }) => {
   for await (const { filePath, languageId } of filesToTranslate) {
     const uploadLogger = new Logger(`Uploading translations for [${languageId}] from file [${filePath}]`)
     try {
+      const realPath = path.join(baseDir, filePath)
+      const fileName = path.basename(realPath)
       const sourceFilePath = sourceFiles.find(p => path.dirname(p) === path.dirname(filePath))
       const sourceFile = projectFiles.find(({ data }) => data.path === path.join('/', branch.name, sourceFilePath))
+      const currentFile = yaml.load(fs.readFileSync(realPath, 'utf-8'))
       if (!sourceFile) throw new Error(`Upload source file first ${filePath}`)
       const { data: { id: fileId } } = sourceFile
       let isPossibleToCheckout = !!diffWith
       if (isPossibleToCheckout) {
         try {
-          await git.show(diffWith)
+          await git.checkout(diffWith, [realPath])
         } catch { isPossibleToCheckout = false }
       }
 
       if (isPossibleToCheckout) {
-        const realPath = path.join(baseDir, filePath)
-        const currentFile = yaml.load(fs.readFileSync(realPath, 'utf-8'))
-        await git.checkout(diffWith, [realPath])
-        await git.checkout(diffWith, [realPath])
         const diffFile = yaml.load(fs.readFileSync(realPath, 'utf-8'))
         await git.checkout('HEAD', [realPath])
         const fileContent = diff(diffFile, currentFile)
-        const fileName = path.basename(realPath)
         const storageId = await uploadToStorage(dumpPostprocess(yaml.dump(fileContent)), fileName)
         await uploadTranslation(fileId, languageId, storageId)
         uploadLogger.success()
       } else {
-        const storageId = await uploadToStorage(filePath)
+        const storageId = await uploadToStorage(dumpPostprocess(yaml.dump(currentFile)), fileName)
         await uploadTranslation(fileId, languageId, storageId)
         uploadLogger.success()
       }
