@@ -1,4 +1,4 @@
-# crowdin-cli-tool [![Supporting](https://github.com/Cado-Labs/cado-labs-logos/blob/main/cado_labs_badge.png)](https://github.com/Cado-Labs/) ![release](https://github.com/Cado-Labs/CrowdinCLI/actions/workflows/release-package.yml/badge.svg)
+# crowdin-cli-tool <a target="_blank" href="https://github.com/Cado-Labs"><img src="https://github.com/Cado-Labs/cado-labs-logos/raw/main/cado_labs_badge.svg" alt="Supported by Cado Labs" style="max-width: 100%; height: 20px"></a> ![release](https://github.com/Cado-Labs/CrowdinCLI/actions/workflows/release-package.yml/badge.svg)
 
 Crowdin CLI optimized for work with branches
 
