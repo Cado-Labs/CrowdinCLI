@@ -23,7 +23,7 @@
     "diff": "^5.0.0",
     "glob": "^7.1.7",
     "js-yaml": "^4.1.0",
-    "simple-git": "^2.39.0",
+    "simple-git": "^3.27.0",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
