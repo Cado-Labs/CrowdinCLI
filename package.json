@@ -1,6 +1,6 @@
 {
   "name": "@cadolabs/crowdin-cli",
-  "version": "3.0.19",
+  "version": "3.0.20",
   "description": "Cli tool for crowdin",
   "main": "index.js",
   "repository": {
@@ -23,7 +23,7 @@
     "diff": "^5.0.0",
     "glob": "^7.1.7",
     "js-yaml": "^4.1.0",
-    "simple-git": "^2.39.0",
+    "simple-git": "^3.27.0",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
