@@ -1,6 +1,6 @@
 {
   "name": "@cadolabs/crowdin-cli",
-  "version": "3.0.20",
+  "version": "3.0.21",
   "description": "Cli tool for crowdin",
   "main": "index.js",
   "repository": {
@@ -16,7 +16,7 @@
   "author": "Genys",
   "license": "ISC",
   "dependencies": {
-    "@crowdin/crowdin-api-client": "^1.11.0",
+    "@crowdin/crowdin-api-client": "^1.42.0",
     "decompress": "^4.2.1",
     "deep-object-diff": "^1.1.0",
     "deepmerge": "^4.2.2",
