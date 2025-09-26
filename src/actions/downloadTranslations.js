@@ -44,7 +44,7 @@ module.exports = async (branch, projectData) => {
       })
     })
 
-    fs.rmdirSync(tmpUnzipPath, { recursive: true })
+    fs.rmSync(tmpUnzipPath, { recursive: true })
     fs.unlinkSync(tmpZipPath)
     unzipLogger.success()
   } catch (err) { unzipLogger.error(err) }
