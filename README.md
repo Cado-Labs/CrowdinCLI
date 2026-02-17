@@ -124,6 +124,8 @@ Where `<crowdin_token>` - api token generated in crowdin profile with `access al
 
 `--skip-format-step` - Deprecated. Skip format step after download translations
 
+`--do-not-upload-template` - Do not upload source or translation strings with this value
+
 `--contributors` - Comma separated user id list to assign new tasks
 
 ### Config
@@ -158,6 +160,7 @@ Place file `.crowdin-config.json` in project directory.
   "skipAssignedStrings": boolean, // Skip strings already included in other tasks
   "exportWithMinApprovalsCount": number, // Defines whether to export only approved strings
   "skipFormatStep": boolean, // Deprecated. Skip format step after download translations
+  "doNotUploadTemplate": string, // Do not upload source or translation strings with this value
 }
 ```
 

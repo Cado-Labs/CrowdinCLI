@@ -7,8 +7,16 @@ const uploadToStorage = require('../services/uploadToStorage')
 const uploadFile = require('../services/uploadFile')
 const uploadTranslation = require('../services/uploadTranslation')
 const dumpPostprocess = require('../utils/dumpPostprocess')
+const filterValuesDeep = require('../utils/filterValuesDeep')
 const Logger = require('../Logger')
-const { baseDir, diffWith } = require('../config')
+const { baseDir, diffWith, doNotUploadTemplate } = require('../config')
+
+const filterContent = content => {
+  if (doNotUploadTemplate) {
+    return filterValuesDeep(content, doNotUploadTemplate)
+  }
+  return content
+}
 
 module.exports = async (branch, { sourceFiles, sourceLocale }) => {
   const pushLogger = new Logger(`Pushing files diff to branch: ${branch.branchName}`)
@@ -42,7 +50,7 @@ module.exports = async (branch, { sourceFiles, sourceLocale }) => {
       await git.checkout('master', [realPath])
       const masterFile = yaml.load(fs.readFileSync(realPath, 'utf-8'))
       await git.checkout('HEAD', [realPath])
-      const fileContent = diff(masterFile, userFile)
+      const fileContent = filterContent(diff(masterFile, userFile))
       const fileName = path.basename(filePath)
       const storageId = await uploadToStorage(dumpPostprocess(yaml.dump(fileContent)), fileName)
       const fileId = await uploadFile(branch, filePath, storageId)

@@ -7,8 +7,16 @@ const uploadToStorage = require('../services/uploadToStorage')
 const uploadTranslation = require('../services/uploadTranslation')
 const listProjectFiles = require('../services/listProjectFiles')
 const dumpPostprocess = require('../utils/dumpPostprocess')
+const filterValuesDeep = require('../utils/filterValuesDeep')
 const Logger = require('../Logger')
-const { baseDir, diffWith } = require('../config')
+const { baseDir, diffWith, doNotUploadTemplate } = require('../config')
+
+const filterContent = content => {
+  if (doNotUploadTemplate) {
+    return filterValuesDeep(content, doNotUploadTemplate)
+  }
+  return content
+}
 
 module.exports = async (branch, { filesToTranslate, sourceFiles }) => {
   const prepareUploadLogger = new Logger('Prepare project to upload')
@@ -38,12 +46,13 @@ module.exports = async (branch, { filesToTranslate, sourceFiles }) => {
       if (isPossibleToCheckout) {
         const diffFile = yaml.load(fs.readFileSync(realPath, 'utf-8'))
         await git.checkout('HEAD', [realPath])
-        const fileContent = diff(diffFile, currentFile)
+        const fileContent = filterContent(diff(diffFile, currentFile))
         const storageId = await uploadToStorage(dumpPostprocess(yaml.dump(fileContent)), fileName)
         await uploadTranslation(fileId, languageId, storageId)
         uploadLogger.success()
       } else {
-        const storageId = await uploadToStorage(dumpPostprocess(yaml.dump(currentFile)), fileName)
+        const fileContent = filterContent(currentFile)
+        const storageId = await uploadToStorage(dumpPostprocess(yaml.dump(fileContent)), fileName)
         await uploadTranslation(fileId, languageId, storageId)
         uploadLogger.success()
       }
