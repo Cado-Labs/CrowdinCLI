@@ -1,4 +1,4 @@
-const simpleGit = require('simple-git')
+const { simpleGit } = require('simple-git')
 const Logger = require('./Logger')
 const params = require('./params')
 const config = require('./config')

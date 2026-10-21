@@ -1,5 +1,5 @@
 const fs = require('fs')
-const git = require('simple-git')()
+const { simpleGit } = require('simple-git')
 const path = require('path')
 const decompress = require('decompress')
 const { baseDir, path: basePath } = require('../config')
@@ -9,6 +9,8 @@ const buildProject = require('../services/buildProject')
 const generateFileName = require('../utils/generateFileName')
 const mergeAndSave = require('../utils/mergeAndSave')
 const Logger = require('../Logger')
+
+const git = simpleGit()
 
 module.exports = async (branch, { sourceFiles, project }) => {
   const pullLogger = new Logger(`Pulling files diff from branch: ${branch.name}`)

@@ -1,6 +1,6 @@
 {
   "name": "@cadolabs/crowdin-cli",
-  "version": "3.0.22",
+  "version": "3.1.0",
   "description": "Cli tool for crowdin",
   "main": "index.js",
   "repository": {
@@ -16,14 +16,14 @@
   "author": "Genys",
   "license": "ISC",
   "dependencies": {
-    "@crowdin/crowdin-api-client": "1.48.2",
+    "@crowdin/crowdin-api-client": "1.59.1",
     "decompress": "^4.2.1",
     "deep-object-diff": "^1.1.0",
     "deepmerge": "^4.2.2",
     "diff": "^5.0.0",
     "glob": "^7.1.7",
-    "js-yaml": "^4.1.0",
-    "simple-git": "^3.27.0",
+    "js-yaml": "4.3.2",
+    "simple-git": "4.0.2",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
