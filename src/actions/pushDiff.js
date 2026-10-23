@@ -1,7 +1,7 @@
 const yaml = require('js-yaml')
 const fs = require('fs')
 const { diff } = require('deep-object-diff')
-const git = require('simple-git')()
+const { simpleGit } = require('simple-git')
 const path = require('path')
 const uploadToStorage = require('../services/uploadToStorage')
 const uploadFile = require('../services/uploadFile')
@@ -9,6 +9,8 @@ const uploadTranslation = require('../services/uploadTranslation')
 const dumpPostprocess = require('../utils/dumpPostprocess')
 const Logger = require('../Logger')
 const { baseDir, diffWith } = require('../config')
+
+const git = simpleGit()
 
 module.exports = async (branch, { sourceFiles, sourceLocale }) => {
   const pushLogger = new Logger(`Pushing files diff to branch: ${branch.branchName}`)

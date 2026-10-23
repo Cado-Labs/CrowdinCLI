@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const decompress = require('decompress')
-const git = require('simple-git')()
+const { simpleGit } = require('simple-git')
 const generateFileName = require('../utils/generateFileName')
 const downloadFile = require('../utils/downloadFile')
 const buildProject = require('../services/buildProject')
@@ -9,6 +9,8 @@ const api = require('../api')
 const { baseDir, path: basePath, skipFormatStep } = require('../config')
 const Logger = require('../Logger')
 const formatFiles = require('../services/formatFiles')
+
+const git = simpleGit()
 
 module.exports = async (branch, projectData) => {
   const { project, sourceFiles } = projectData

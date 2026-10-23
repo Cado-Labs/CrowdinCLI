@@ -1,7 +1,7 @@
 const yaml = require('js-yaml')
 const fs = require('fs')
 const diffUtil = require('diff')
-const git = require('simple-git')()
+const { simpleGit } = require('simple-git')
 const path = require('path')
 const { baseDir } = require('../config')
 const { fix } = require('../params')
@@ -10,6 +10,8 @@ const dumpOptions = require('../constans/dumpOptions')
 const dumpPostprocess = require('../utils/dumpPostprocess')
 const formatFiles = require('../services/formatFiles')
 const deleteBranch = require('./deleteBranch')
+
+const git = simpleGit()
 
 module.exports = async (branch, project) => {
   const { filesToTranslate } = project

@@ -2,13 +2,15 @@ const path = require('path')
 const yaml = require('js-yaml')
 const fs = require('fs')
 const { diff } = require('deep-object-diff')
-const git = require('simple-git')()
+const { simpleGit } = require('simple-git')
 const uploadToStorage = require('../services/uploadToStorage')
 const uploadTranslation = require('../services/uploadTranslation')
 const listProjectFiles = require('../services/listProjectFiles')
 const dumpPostprocess = require('../utils/dumpPostprocess')
 const Logger = require('../Logger')
 const { baseDir, diffWith } = require('../config')
+
+const git = simpleGit()
 
 module.exports = async (branch, { filesToTranslate, sourceFiles }) => {
   const prepareUploadLogger = new Logger('Prepare project to upload')
